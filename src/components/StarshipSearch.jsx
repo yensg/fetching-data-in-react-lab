@@ -15,7 +15,9 @@ const StarshipSearch = (props) => {
       prevSearchTerm.current.lastSearchedTerm = event.target.value;
     }
   };
-  //Use the state variable you created in step 9 (prevSearchTerm) to display the previous search query to the user. If the user has not conducted a search, display the text "Search for a starship by name." instead?
+  //Use the state variable you created in step 9 (prevSearchTerm) to display the previous search query to the user. If the user has not conducted a search, display the text "Search for a starship by name." instead.
+  //What happens if you filter the starship state using an empty string?
+  //useRef doesnt re-render any other ways?
 
   const clickedSearch = () => {
     props.searchStarship(search);
