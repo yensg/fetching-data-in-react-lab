@@ -38,26 +38,50 @@ function App() {
   }, []);
 
   const prevSearchTerm = useRef({
-    //can use this here and another component at the same time?
     number: 0,
     lastSearchedTerm: "",
   });
 
+  // const searchStarship = (starshipName) => {
+  //   prevSearchTerm.current.number++;
+  //   // console.log(starshipName);
+  //   console.log(prevSearchTerm.current.number);
+  //   starshipData.filter((eachStarship) => {
+  //     if (
+  //       eachStarship.name.toLowerCase().includes(starshipName.toLowerCase())
+  //     ) {
+  //       setDisplayStarships([eachStarship]);
+  //     }
+  //   });
+  // };
+
+  // Loop eachStarship
+  // const searchStarship = (starshipName) => {
+  //   let searchArray = [];
+  //   for (const eachStarship of starshipData) {
+  //     if (
+  //       eachStarship.name.toLowerCase().includes(starshipName.toLowerCase())
+  //     ) {
+  //       searchArray.push(eachStarship);
+  //     }
+  //   }
+  //   setDisplayStarships(searchArray);
+  //   prevSearchTerm.current.number = searchArray.length;
+  // };
+
   const searchStarship = (starshipName) => {
-    prevSearchTerm.current.number++;
-    // console.log(starshipName);
-    console.log(prevSearchTerm.current.number);
-    starshipData.filter((eachStarship) => {
-      if (
-        eachStarship.name.toLowerCase().includes(starshipName.toLowerCase())
-      ) {
-        setDisplayStarships((prevState) => [eachStarship]);
-      }
+    const filteredResults = starshipData.filter((eachStarship) => {
+      return eachStarship.name
+        .toLowerCase()
+        .includes(starshipName.toLowerCase());
     });
+    setDisplayStarships(filteredResults);
+    prevSearchTerm.current.number = filteredResults.length;
   };
 
   const showAllStarships = () => {
     setDisplayStarships(starshipData);
+    prevSearchTerm.current.number = 0;
   };
 
   return (
@@ -72,6 +96,7 @@ function App() {
               searchStarship={searchStarship}
               showAllStarships={showAllStarships}
             />
+            <p>Last searched term: {prevSearchTerm.current.lastSearchedTerm}</p>
           </div>
           {!isLoading && starshipData && (
             <div className="container">
